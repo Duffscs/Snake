@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" nonce="m5Hyo9kR5LgsdKYrXGD6wQ==" aria-hidden="true">
+    <link rel="stylesheet" href="style.css">
+    <title>Jeux</title>
+</head>
+
+<body style="overflow: hidden;">
+    <noscript>Activer le js connard</noscript>
+    <div id="top">
+        <img id="pomme" src="Sprite/pomme.png" alt="pomme">
+        <label id="score" for="pomme">0</label>
+        <img id="high" src="Sprite/highScore.png" alt="high">
+        <label id="highscore" for="high">0</label>
+        <img id="volumeOn" class="volume" src="Sprite/volumeOn.png" alt="volumeOn">
+        <img id="volumeOff" class="volume" style="display: none;" src="Sprite/volumeOff.png" alt="volumeOff">
+        <button id="recommencer">Recommencer</button>
+    </div>
+    <canvas width="800px" height="800px"></canvas>
+
+    <img id="corp" src="Sprite/corps.png" alt="pomme" hidden>
+    <img id="tete" src="Sprite/tête.png" alt="pomme" hidden>
+    <img id="queue" src="Sprite/queue.png" alt="pomme" hidden>
+    <img id="coude" src="Sprite/coude.png" alt="pomme" hidden>
+    <audio id="croc" src="Sprite/croc.mp3"></audio>
+    <audio id="mort" src="Sprite/ouh.wav"></audio>
+
+    <script type="module">
+        import { Terrain } from "./Terrain.js";
+        const cv = document.querySelector("canvas");
+        const gc = cv.getContext("2d");
+        const terrain = new Terrain(gc);
+        document.getElementById("recommencer").addEventListener("click", ev => {
+            if (!terrain.stop)
+                terrain.defeat();
+            terrain.preparer();
+        });
+
+
+        // Mute a singular HTML5 element
+        function muteMe(elem, bool) {
+            elem.muted = bool;
+            elem.pause();
+        }
+        // Try to mute all video and audio elements on the page
+        function mutePage(bool) {
+            document.querySelectorAll("video, audio").forEach(elem => muteMe(elem, bool));
+        }
+
+        document.getElementById('volumeOn').addEventListener("click", ev => {
+            mutePage(true);
+            ev.target.style.display = "none";
+            document.getElementById('volumeOff').style.display = "block";
+        });
+
+        document.getElementById('volumeOff').addEventListener("click", ev => {
+            mutePage(false);
+            ev.target.style.display = "none";
+            document.getElementById('volumeOn').style.display = "block";
+        });
+    </script>
+</body>
+
+</html>

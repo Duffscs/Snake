@@ -1,0 +1,66 @@
+body {
+    font-weight: 400;
+    font-family: 'Roboto';
+}
+
+#top {
+    background-color: #4a752c;
+    width: 800px;
+    border: 0 #4a752c solid;
+    border-width: 20px 40px;
+    margin: auto;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 60px 100px 60px 400px 60px auto;
+}
+
+#top img {
+    width: 40px;
+}
+.volume {
+    cursor: pointer;
+}
+
+#recommencer {
+    color: #fff;
+    background-color: #dc3545;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    user-select: none;
+    border: 0 solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    width: 100%;
+    cursor: pointer;
+}
+
+#recommencer:hover {
+    background-color: #c82333;
+}
+
+#top label {
+    color: #fff;
+    font-weight: 400;
+    font-size: 25px;
+}
+
+canvas {
+    width: 800px;
+    height: 800px;
+    background-color: #a2d149;
+    background-image:
+        linear-gradient(45deg,#aad751 25%, transparent 25%), 
+        linear-gradient(135deg,#aad751 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%,#aad751 75%),
+        linear-gradient(135deg, transparent 75%,#aad751 75%);
+    background-size: 80px 80px;
+    background-position: 0 0, 40px 0, 40px -40px, 0 -40px;
+    margin: auto;
+    display: block;
+    border: 40px solid #578a34;
+}
