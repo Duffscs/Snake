@@ -7,6 +7,7 @@ export class ObjectSet extends Set {
         for (let i = 0; i < width; i += spriteSize) {
             for (let o = 0; o < height; o += spriteSize) {
                 this.add(new Position(i, o));
+                console.log(i,o);
             }
         }
     }

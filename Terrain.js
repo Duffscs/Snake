@@ -4,21 +4,20 @@ import { Serpent } from "./Serpent/Serpent.js";
 
 export class Terrain {
 
-    constructor(gc) {
+    constructor(gc, size) {
         this.gc = gc;
-        this.width = gc.canvas.clientWidth;
-        this.height = gc.canvas.clientHeight;
-        this.spriteSize = 40;
+        this.size = size;
+        this.spriteSize = size/20;
         this.delai = 100;
         this.event = ev => this.serpent.orienter(ev);
         this.preparer();
     }
 
     preparer() {
-        this.gc.clearRect(0, 0, 800, 800);
+        this.gc.clearRect(0, 0, this.size, this.size);
         this.stop = false;
         this.serpent = new Serpent(this.gc, this.spriteSize);
-        this.posLibre = new ObjectSet(this.width, this.height, this.spriteSize);
+        this.posLibre = new ObjectSet(this.size, this.size, this.spriteSize);
         this.posLibre.delete(this.serpent.corps[1].position);
         this.posLibre.delete(this.serpent.corps[2].position);
         document.addEventListener("keydown", this.event);
@@ -67,9 +66,9 @@ export class Terrain {
         this.gc.textAlign = 'center';
         this.gc.font = '48px Roboto';
         this.gc.fillStyle = 'red';
-        this.gc.fillText("Vous avez perdu !", this.width / 2, this.height / 4);
+        this.gc.fillText("Vous avez perdu !", this.size / 2, this.size / 4);
         this.gc.strokeStyle = 'black';
-        this.gc.strokeText("Vous avez perdu !", this.width / 2, this.height / 4);
+        this.gc.strokeText("Vous avez perdu !", this.size / 2, this.size / 4);
         this.stop = true;
         clearInterval(this.interval);
         this.serpent = null;
@@ -87,5 +86,12 @@ export class Terrain {
     render() {
         this.serpent.render();
         this.pomme.render();
+    }
+
+    resize(size){
+        this.size = size;
+        this.spriteSize = size/20;
+        this.defeat();
+        this.preparer();
     }
 }

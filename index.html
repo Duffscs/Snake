@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" nonce="m5Hyo9kR5LgsdKYrXGD6wQ==" aria-hidden="true">
+    <link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css"
+        nonce="m5Hyo9kR5LgsdKYrXGD6wQ==" aria-hidden="true">
     <link rel="stylesheet" href="style.css">
     <title>Jeux</title>
 </head>
 
 <body style="overflow: hidden;">
-    <noscript>Activer le js connard</noscript>
+    <noscript>Activer le JS SVP</noscript>
     <div id="top">
         <img id="pomme" src="Sprite/pomme.png" alt="pomme">
         <label id="score" for="pomme">0</label>
@@ -18,7 +19,7 @@
         <label id="highscore" for="high">0</label>
         <img id="volumeOn" class="volume" src="Sprite/volumeOn.png" alt="volumeOn">
         <img id="volumeOff" class="volume" style="display: none;" src="Sprite/volumeOff.png" alt="volumeOff">
-        <button id="recommencer">Recommencer</button>
+        <img id="recommencer" src="Sprite/restart.png" alt="restart">
     </div>
     <canvas width="800px" height="800px"></canvas>
 
@@ -33,11 +34,19 @@
         import { Terrain } from "./Terrain.js";
         const cv = document.querySelector("canvas");
         const gc = cv.getContext("2d");
-        const terrain = new Terrain(gc);
+        const size = sizePage(cv);
+        const terrain = new Terrain(gc, size);
+
         document.getElementById("recommencer").addEventListener("click", ev => {
             if (!terrain.stop)
                 terrain.defeat();
             terrain.preparer();
+        });
+
+        window.addEventListener('resize', e => {
+            const size = sizePage(cv);
+            console.log(size);
+            terrain.resize(size);
         });
 
 
@@ -62,6 +71,23 @@
             ev.target.style.display = "none";
             document.getElementById('volumeOn').style.display = "block";
         });
+
+        function sizePage(cv) {
+            let size = 400;
+            document.body.style.width = '';
+            size = document.body.clientWidth >= 720 ? 450 : size;
+            size = document.body.clientWidth >= 1280 ? 600 : size;
+            size = document.body.clientWidth >= 1920 ? 700 : size;
+            cv.width = size;
+            cv.height = size;
+            document.body.style.width = (size + (size / 10)) + 'px';
+            document.getElementById('top').style.width = size + 'px';
+            document.getElementById('top').style.borderWidth = (size / 40) + 'px ' + (size / 20) + 'px';
+            cv.style.backgroundSize = (size / 10) + 'px ' + (size / 10) + 'px ';
+            cv.style.backgroundPosition = '0 0, ' + (size / 20) + 'px 0, ' + (size / 20) + 'px -' + (size / 20) + 'px, 0 -' + (size / 20) + 'px ';
+            cv.style.border = (size / 20) + 'px solid #578a34';
+            return size;
+        }
     </script>
 </body>
 
