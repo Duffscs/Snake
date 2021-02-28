@@ -1,6 +1,6 @@
 # Snake
 
-Application Web, permettant de jouer a snake.
+Application Web, permettant de jouer à snake.
 
 Vous pouvez jouer ici
 https://duffscs.github.io/Snake/
